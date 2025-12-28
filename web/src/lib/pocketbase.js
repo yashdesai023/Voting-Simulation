@@ -8,5 +8,9 @@ export const pb = new PocketBase(url);
 // Helper to get full image URL
 export const getImageUrl = (collectionId, recordId, filename) => {
     if (!filename) return null;
-    return `${pb.baseUrl}/api/files/${collectionId}/${recordId}/${filename}`;
+    let base = pb.baseUrl;
+    if (base.endsWith('/')) {
+        base = base.slice(0, -1); // Remove trailing slash
+    }
+    return `${base}/api/files/${collectionId}/${recordId}/${filename}`;
 };
