@@ -1,8 +1,9 @@
 import PocketBase from 'pocketbase';
 
 // Connect to your local PocketBase instance
-// If hosted remotely, replace this URL
-export const pb = new PocketBase('http://3.149.240.100');
+// If hosted remotely, replace this URL or use VITE_POCKETBASE_URL in .env
+const url = import.meta.env.VITE_POCKETBASE_URL || 'http://3.149.240.100';
+export const pb = new PocketBase(url);
 
 // Helper to get full image URL
 export const getImageUrl = (collectionId, recordId, filename) => {
