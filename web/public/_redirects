@@ -1,0 +1,7 @@
+# Netlify Proxy Rules
+# Proxy API requests to avoid Mixed Content (HTTPS -> HTTP) issues
+/api/*  http://3.149.240.100/api/:splat  200
+/_/*    http://3.149.240.100/_/:splat    200
+
+# React Router Fallback
+/*  /index.html  200
