@@ -1,0 +1,299 @@
+/* Professional Admin Styling */
+.manage-ward-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #111827;
+}
+
+.back-btn {
+    background: white;
+    border: 1px solid #d1d5db;
+    padding: 8px 16px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #374151;
+    cursor: pointer;
+    margin-bottom: 24px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-content h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+}
+
+.meta-text {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-primary:disabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+}
+
+.btn-success {
+    background-color: #10b981;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+}
+
+.btn-disabled {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+/* Ward Branding Section */
+.ward-settings-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border: 1px solid #e5e7eb;
+}
+
+.ward-settings-card h2 {
+    font-size: 1.25rem;
+    color: #111827;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 15px;
+    margin: 0 0 20px 0;
+}
+
+.branding-upload-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.upload-group {
+    flex: 2;
+    min-width: 300px;
+}
+
+.upload-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.file-input-wrapper input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+.upload-hint {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-top: 6px;
+}
+
+.branding-preview {
+    width: 240px;
+    height: 135px;
+    /* 16:9 */
+    background-color: #f3f4f6;
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.branding-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Machine Cards */
+.machines-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.machine-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+
+.machine-header {
+    background-color: #f8fafc;
+    padding: 15px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.machine-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge-success {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.badge-warning {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.machine-body {
+    padding: 24px;
+}
+
+.instruction-text {
+    background-color: #eff6ff;
+    color: #1e40af;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    border-left: 4px solid #3b82f6;
+}
+
+/* Form Styling */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.half {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.half label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #374151;
+    font-size: 0.95rem;
+}
+
+.half input[type="text"],
+.half input[type="number"],
+.half input[type="file"] {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.half input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.preview-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    margin-top: 10px;
+    background: #f9fafb;
+}
+
+.checkbox-group {
+    background: #f9fafb;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.btn-save {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

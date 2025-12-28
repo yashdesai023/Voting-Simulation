@@ -1,0 +1,103 @@
+:root {
+  --evm-bg: #e8e8e8;
+  --unit-bg: #ffffff;
+  --header-bg: #ffffff;
+  --text-color: #000000;
+  --border-color: #d0d0d0;
+  --primary-blue: #0033cc;
+  --led-red: #ff0000;
+  --led-off: #550000;
+  --stripe-pink: #ffe6e6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', 'Eczar', sans-serif;
+  /* Vibrating Indian Flag Gradient: Richer Saffron -> White -> Richer Green */
+  background: linear-gradient(135deg, #FF9933 0%, #ffffff 50%, #138808 100%);
+  background-attachment: fixed;
+  /* Keeps gradient fast during scroll */
+  color: var(--text-color);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+}
+
+.app-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Horizontally center children */
+  gap: 20px;
+  padding: 20px;
+  margin: 0;
+}
+
+.units-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.completion-message {
+  text-align: center;
+  margin-top: 50px;
+  padding: 40px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in;
+}
+
+.completion-message h2 {
+  color: #008000;
+  margin-bottom: 20px;
+}
+
+.check-icon {
+  font-size: 80px;
+  color: #008000;
+  display: inline-block;
+  animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}

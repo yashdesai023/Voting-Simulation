@@ -1,0 +1,216 @@
+.candidate-row {
+    display: flex;
+    height: 50px;
+    /* Fixed height per row */
+    background-color: #d1d5db;
+    /* Separator color */
+    border-bottom: 2px solid #555;
+    /* Dark line between rows */
+    padding: 0;
+}
+
+.candidate-row:first-child {
+    border-top: 2px solid #555;
+}
+
+/* Left Section: Paper Ballot */
+.paper-section {
+    flex: 1;
+    background-color: #f3f4f6;
+    /* Paper white/grey */
+    margin-right: 12px;
+    /* Gap for the hinge/frame */
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-right: 1px solid #bbb;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+.serial-no {
+    width: 30px;
+    font-weight: bold;
+}
+
+.candidate-name {
+    flex: 1;
+    font-weight: 500;
+    padding-left: 10px;
+    border-right: 1px solid #bbb;
+}
+
+.candidate-photo {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #bbb;
+}
+
+.photo-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    border-radius: 4px;
+    /* Passport photo style */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+
+.symbol {
+    width: 50px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Right Section: Button & LED */
+.machine-section {
+    width: 125px;
+    background-color: #d1d5db;
+    /* Plastic casing */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px 0 1px;
+    /* Reduced left padding to move LED left */
+    position: relative;
+}
+
+/* The distinct bevel styling for the button area */
+.machine-section::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    /* In the gap */
+    width: 12px;
+    height: 100%;
+    background: linear-gradient(to right, #999, #d1d5db);
+    box-shadow: inset 2px 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.led {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #5a0000;
+    /* Very dark maroon for 'off' state */
+    border: none;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+    /* Depth */
+}
+
+.led-on {
+    background-color: #ff0000;
+    box-shadow: 0 0 8px #ff0000;
+}
+
+.vote-btn {
+    width: 90px;
+    height: 32px;
+    background-color: #0f3a7e;
+    /* Flat dark blue essentially */
+    border-radius: 16px;
+    border: none;
+    box-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vote-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.vote-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+    /* Make disabled buttons look dull */
+}
+
+.btn-inner {
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+}
+
+.row-img-symbol {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 2px;
+}
+
+.row-img-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .candidate-row {
+        height: auto;
+        /* Allow growth if needed, but maintain alignment */
+        min-height: 50px;
+    }
+
+    .paper-section {
+        margin-right: 5px;
+        /* Smaller gap */
+        padding: 0 5px;
+    }
+
+    .serial-no {
+        width: 25px;
+        font-size: 0.9rem;
+    }
+
+    .candidate-photo {
+        width: 45px;
+    }
+
+    .symbol {
+        width: 40px;
+    }
+
+    .candidate-name {
+        font-size: 0.9rem;
+        padding-left: 5px;
+    }
+
+    .machine-section {
+        width: 110px;
+        /* Squeeze button section */
+        padding: 0 5px;
+    }
+
+    .vote-btn {
+        width: 70px;
+        /* Smaller button */
+        height: 28px;
+    }
+
+    .btn-inner {
+        font-size: 0.55rem;
+    }
+
+    .led {
+        width: 12px;
+        height: 12px;
+    }
+}

@@ -1,0 +1,127 @@
+.evm-header {
+    background: linear-gradient(90deg, #1e3a8a 0%, #4f46e5 100%);
+    /* Deep Blue -> Indigo */
+    border-bottom: none;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+
+    /* Sticky Positioning */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    color: white;
+    /* Make text white */
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 8px;
+    /* Soft square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.company-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    /* Ensure title is white */
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.controls-section {
+    display: flex;
+    align-items: center;
+}
+
+.lang-dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.lang-icon {
+    position: absolute;
+    left: 10px;
+    color: #6b7280;
+    pointer-events: none;
+}
+
+.lang-select {
+    padding: 8px 12px 8px 36px;
+    /* Space for icon */
+    font-size: 0.95rem;
+    color: #374151;
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s;
+    appearance: none;
+    /* Custom arrow usually needs more CSS or SVG, but browser default is okay for now, 
+       though we hid it with appearance: none, so let's add padding-right for custom arrow or revert. */
+    appearance: auto;
+}
+
+.lang-select:hover {
+    border-color: #9ca3af;
+    background-color: #f3f4f6;
+}
+
+.lang-select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 51, 204, 0.1);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    .evm-header {
+        padding: 10px 15px;
+        height: 60px;
+    }
+
+    .logo-placeholder {
+        width: 32px;
+        height: 32px;
+        font-size: 0.6rem;
+    }
+
+    .company-name {
+        font-size: 1rem;
+    }
+
+    .lang-select {
+        font-size: 0.85rem;
+        padding: 6px 10px 6px 32px;
+    }
+
+    .lang-icon {
+        width: 16px;
+        height: 16px;
+        left: 8px;
+    }
+}

@@ -1,0 +1,184 @@
+.ballot-unit {
+    background-color: #d1d5db;
+    /* Main casing grey */
+    border: 1px solid #9ca3af;
+    border-radius: 12px;
+    /* Sharper corners */
+    box-shadow:
+        -5px 0 10px rgba(0, 0, 0, 0.1),
+        /* Left shadow */
+        5px 0 10px rgba(0, 0, 0, 0.1),
+        /* Right shadow */
+        0 10px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    /* Responsive width */
+    margin: 20px auto;
+    position: relative;
+    padding: 40px 10px 40px 10px;
+    /* Space for top/bottom latches */
+}
+
+/* Top Latch/Connector */
+.ballot-unit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 40px;
+    width: 60px;
+    height: 25px;
+    background-color: #0f3a7e;
+    /* Dark Blue Latch */
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Bottom Latch/Connector */
+.ballot-unit::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 40px;
+    width: 60px;
+    height: 25px;
+    background-color: #0f3a7e;
+    /* Dark Blue Latch */
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* The visual separation between Paper Section and Buttons */
+.candidates-list {
+    display: flex;
+    flex-direction: column;
+    background-color: #e5e7eb;
+    /* Inner frame */
+    border: 1px solid #999;
+}
+
+/* Un-hiding header as per request */
+.bu-header {
+    display: flex;
+    background-color: #d1d5db;
+    border-bottom: 2px solid #555;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #000;
+    padding: 0;
+    /* Removing padding to let children handle it matching row */
+    margin-bottom: 20px;
+}
+
+.unit-branding-row {
+    text-align: center;
+    padding: 2px 0;
+    border-bottom: 1px solid #9ca3af;
+    background-color: #e5e7eb;
+    /* Default fallback */
+}
+
+.unit-label-text {
+    font-size: 1.0rem;
+    font-weight: 700;
+    color: #000;
+}
+
+/* Header Row (Sr No, Name...) */
+.header-paper {
+    flex: 1;
+    background-color: transparent;
+    /* Actually header usually stays grey */
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-right: 1px solid #bbb;
+}
+
+.header-machine {
+    width: 125px;
+    padding: 0 10px 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-col {
+    padding: 5px;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    /* Default center */
+}
+
+.h-sr {
+    width: 30px;
+    justify-content: flex-start;
+    /* Sr No usually left aligned or center? Row is center-ish */
+}
+
+.h-name {
+    flex: 1;
+    justify-content: center;
+    /* Center align title as requested */
+    padding-left: 0;
+}
+
+.h-photo {
+    width: 60px;
+}
+
+.h-symbol {
+    width: 50px;
+    /* Match Row CSS (was 40px) */
+}
+
+.h-btn {
+    width: 100%;
+    text-align: center;
+}
+
+/* Mobile Header Adjustments */
+@media (max-width: 600px) {
+    .header-paper {
+        margin-right: 5px;
+        padding: 0 5px;
+    }
+
+    .header-machine {
+        width: 110px;
+        padding: 0 5px;
+    }
+
+    .h-sr {
+        width: 25px;
+        font-size: 0.8rem;
+    }
+
+    .h-photo {
+        width: 45px;
+        font-size: 0.8rem;
+    }
+
+    .h-symbol {
+        width: 40px;
+        font-size: 0.8rem;
+    }
+
+    .h-name {
+        font-size: 0.8rem;
+    }
+}
+
+.bu-footer {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    /* "Ready" lamp is usually near top right or top left on different models. 
+     Reference image has LEDs on right. We'll place Ready lamp discreetly or hide if not in image.
+     The uploaded image shows LEDs for candidates. "Ready" might be the top one? 
+     No, the image is a generic labeled diagram. I'll stick to the candidate rows being the main focus.
+  */
+    display: none;
+}
