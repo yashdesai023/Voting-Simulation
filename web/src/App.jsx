@@ -21,6 +21,7 @@ const VotingApp = () => {
   const { wardId } = useParams(); // Changed from wardCode
   const { getWard } = useWard();
   const [wardData, setWardData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const [language, setLanguage] = useState('mr');
   const [votedSerial, setVotedSerial] = useState(null);
@@ -33,15 +34,23 @@ const VotingApp = () => {
       // Fetch by ID directly
       // Note: consume the promise properly in useEffect or use IIFE
       const load = async () => {
-        const data = await getWard(wardId);
-        if (data) {
-          console.log("Ward Data Loaded:", data); // Debugging
-          if (data.status === 'Active') {
-            setWardData(data);
+        try {
+          const data = await getWard(wardId);
+          if (data) {
+            console.log("Ward Data Loaded:", data); // Debugging
+            if (data.status === 'Active') {
+              setWardData(data);
+            }
           }
+        } catch (error) {
+          console.error("Failed to load ward:", error);
+        } finally {
+          setLoading(false);
         }
       };
       load();
+    } else {
+      setLoading(false);
     }
   }, [wardId, getWard]);
 
@@ -65,6 +74,14 @@ const VotingApp = () => {
       }
     }
   }, [wardData]);
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f3f4f6' }}>
+        <div style={{ fontSize: '1.2rem', color: '#666' }}>Loading Ballot Unit...</div>
+      </div>
+    );
+  }
 
   // If no ward found or inactive
   if (!wardData && wardId) {

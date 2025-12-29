@@ -75,10 +75,13 @@
 }
 
 .summary-row {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    /* Fixed label width, rest for value */
+    gap: 15px;
     padding: 8px 0;
     border-bottom: 1px solid #f1f5f9;
+    align-items: center;
 }
 
 .summary-row:last-child {
@@ -89,11 +92,14 @@
     color: #64748b;
     font-size: 0.9rem;
     font-weight: 500;
+    text-align: right;
+    /* Align labels to right */
 }
 
 .summary-row .value {
     color: #0f172a;
     font-weight: 600;
+    text-align: left;
 }
 
 .highlight .value {
@@ -123,25 +129,36 @@
 
 .candidate-mini-card {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    /* Center Vertically */
+    justify-content: flex-start;
+    /* Start from left */
+    gap: 15px;
+    /* Space between label and name */
     background-color: #f9fafb;
-    padding: 8px 12px;
+    padding: 10px 12px;
     border-radius: 6px;
     border: 1px solid #f3f4f6;
 }
 
 .machine-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     background-color: #e0e7ff;
     color: #3730a3;
-    padding: 2px 8px;
-    border-radius: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
     font-weight: 600;
+    white-space: nowrap;
+    /* Prevent wrapping */
+    min-width: 80px;
+    /* Consistent width */
+    text-align: center;
 }
 
 .cand-name {
-    font-weight: 500;
+    font-weight: 600;
     color: #111827;
+    font-size: 0.95rem;
 }
 
 /* Actions */

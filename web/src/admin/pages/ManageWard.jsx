@@ -27,10 +27,16 @@ const ManageWard = () => {
             if (data) {
                 setWard(data);
                 setCandidates(data.candidates || {});
+                
+                // Normalize Ward/Prabhag to Capitalized case for Select match
+                let normalizedType = data.prabhag_ward || 'Ward';
+                // Capitalize first letter just in case backend has 'ward'
+                normalizedType = normalizedType.charAt(0).toUpperCase() + normalizedType.slice(1);
+
                 setEditFormData({
                     name: data.name || '',
-                    name_marathi: data.name_marathi || '',
-                    prabhag_ward: data.prabhag_ward || 'ward'
+                    name_marathi: data.name_marathi || '', 
+                    prabhag_ward: normalizedType
                 });
             } else {
                 navigate('/admin');
@@ -248,11 +254,15 @@ const ManageWard = () => {
                             <option value="Prabhag">Prabhag (प्रभाग)</option>
                         </select>
                     </div>
-                    <div className="form-group half" style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <button className="btn btn-primary" onClick={handleUpdateWardDetails} style={{ width: '100%' }}>
-                            <Save size={16} /> Update Details
-                        </button>
+                    <div className="form-group half">
+                        {/* Spacer for alignment */}
                     </div>
+                </div>
+                
+                <div className="form-actions">
+                     <button className="btn btn-primary" onClick={handleUpdateWardDetails}>
+                        <Save size={16} /> Update Details
+                    </button>
                 </div>
             </div>
 

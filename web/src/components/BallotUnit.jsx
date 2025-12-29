@@ -17,7 +17,7 @@ const BallotUnit = ({ unitIndex, startSerialNo, language, onVote, votedSerialNo,
                 <div className="header-paper">
                     <div className="header-col h-sr">{t.headerSrNo}</div>
                     <div className="header-col h-name">{t.headerName}</div>
-                    <div className="header-col h-photo">Photo</div>
+                    <div className="header-col h-photo"></div>
                     <div className="header-col h-symbol">{t.headerSymbol}</div>
                 </div>
                 <div className="header-machine">

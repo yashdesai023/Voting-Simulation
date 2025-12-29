@@ -18,8 +18,8 @@
 
 body {
   font-family: 'Poppins', 'Eczar', sans-serif;
-  /* Vibrating Indian Flag Gradient: Richer Saffron -> White -> Richer Green */
-  background: linear-gradient(135deg, #FF9933 0%, #ffffff 50%, #138808 100%);
+  /* Subtle White/Grey Gradient */
+  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
   background-attachment: fixed;
   /* Keeps gradient fast during scroll */
   color: var(--text-color);

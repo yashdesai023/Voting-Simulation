@@ -61,14 +61,14 @@ const CompletionCard = ({ ward, language, votedCandidate, allCandidates }) => {
                 {/* Vote Summary */}
                 <div className="vote-summary">
                     <div className="summary-row">
-                        <span className="label">{t.ward}:</span>
+                        <span className="label">{t.ward}</span>
                         <span className="value">{ward.name}</span>
                     </div>
                     <div className="summary-row">
-                        <span className="label">{t.electionDate}:</span>
+                        <span className="label">{t.electionDate}</span>
                         <span className="value">15 Jan 2026</span>
                     </div>
-                    
+
                 </div>
 
                 {/* All Candidates List */}

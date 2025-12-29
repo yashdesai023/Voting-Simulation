@@ -114,19 +114,19 @@
 
 .h-sr {
     width: 30px;
-    justify-content: flex-start;
-    /* Sr No usually left aligned or center? Row is center-ish */
+    justify-content: center;
+    /* Center align Sr No */
 }
 
 .h-name {
     flex: 1;
-    justify-content: center;
-    /* Center align title as requested */
-    padding-left: 0;
+    justify-content: flex-start;
+    /* Align left but with padding */
+    padding-left: 15px;
 }
 
 .h-photo {
-    width: 60px;
+    width: 50px;
 }
 
 .h-symbol {
@@ -152,12 +152,13 @@
     }
 
     .h-sr {
-        width: 25px;
+        width: 35px;
+        /* More space for Sr No */
         font-size: 0.8rem;
     }
 
     .h-photo {
-        width: 45px;
+        width: 40px;
         font-size: 0.8rem;
     }
 
@@ -168,6 +169,8 @@
 
     .h-name {
         font-size: 0.8rem;
+        padding-left: 8px;
+        /* Reduced padding for mobile but kept separation */
     }
 }
 
