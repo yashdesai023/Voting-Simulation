@@ -174,6 +174,7 @@ const VotingApp = () => {
           language={language}
           votedCandidate={votedCandidate}
           allCandidates={activeCandidates} // Pass all candidates
+          onShare={handleShare} // Pass rich share handler
         />
       );
     }
@@ -230,18 +231,26 @@ const VotingApp = () => {
     const isLocalLang = language === 'mr' || language === 'hi';
     const wardDisplayName = (isLocalLang && wardData?.name_marathi) ? wardData.name_marathi : (wardData?.name || "N/A");
 
-    // Determine candidate name to show (copied logic)
-    const assigned = activeCandidates[currentUnitIndex];
-    const displayCandidateName = assigned ? (isLocalLang ? (assigned.marathiName || assigned.name) : assigned.name) : t.candidateNamePlaceholder;
+    // Generate List of Candidates
+    let candidatesListText = "";
+    if (activeCandidates) {
+      candidatesListText = Object.entries(activeCandidates)
+        .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
+        .map(([idx, candidate]) => {
+          const name = isLocalLang ? (candidate.marathiName || candidate.name) : candidate.name;
+          return `${parseInt(idx) + 1}. ${name}`;
+        })
+        .join('\n');
+    }
 
     const shareText = `
 ${t.shareHeader}
 
-${t.shareCandidateLabel}: ${displayCandidateName}
 ${t.shareWardLabel}: ${wardDisplayName}
+${t.shareDateLabel}: ${t.electionDateValue} | ${t.shareTimeLabel}: ${t.votingTime}
 
-${t.shareDateLabel}: ${t.electionDateValue}
-${t.shareTimeLabel}: ${t.votingTime}
+${t.participatingCandidates}:
+${candidatesListText}
 
 ${t.slogan}
     `.trim();

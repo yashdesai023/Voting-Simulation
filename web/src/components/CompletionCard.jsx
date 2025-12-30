@@ -4,29 +4,12 @@ import './CompletionCard.css';
 import { translations } from '../utils/translations';
 import { getImageUrl } from '../lib/pocketbase';
 
-const CompletionCard = ({ ward, language, votedCandidate, allCandidates }) => {
+const CompletionCard = ({ ward, language, votedCandidate, allCandidates, onShare }) => {
     const t = translations[language] || translations['en'];
     if (!t) return null;
 
     // Branding Image URL
     const brandingImageUrl = ward.last_photo ? getImageUrl(ward.collectionId, ward.id, ward.last_photo) : null;
-
-    const handleShare = async () => {
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: `I Voted! - ${ward.name}`,
-                    text: t.slogan,
-                    url: window.location.href,
-                });
-            } catch (err) {
-                console.log('Error sharing:', err);
-            }
-        } else {
-            navigator.clipboard.writeText(window.location.href);
-            alert("Link copied to clipboard!");
-        }
-    };
 
     return (
         <div className="completion-card">
@@ -114,7 +97,7 @@ const CompletionCard = ({ ward, language, votedCandidate, allCandidates }) => {
                 )}
 
                 <div className="action-area">
-                    <button className="share-btn-large" onClick={handleShare}>
+                    <button className="share-btn-large" onClick={onShare}>
                         <Share2 size={20} /> {t.share}
                     </button>
                     <a href={`/${ward.id}`} className="home-link">
