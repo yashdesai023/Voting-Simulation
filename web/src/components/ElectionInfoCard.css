@@ -1,25 +1,15 @@
 .election-card {
-    /* Glass + Subtle Texture */
-    background-color: rgba(255, 255, 255, 0.92);
-    background-image: radial-gradient(#2563eb 0.5px, transparent 0.5px), radial-gradient(#2563eb 0.5px, rgba(255, 255, 255, 0.9) 0.5px);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 16px;
-    padding: 24px;
+    /* Removed Glass/Card Effect */
+    background: transparent;
+    border: none;
+    padding: 0 10px;
+    /* Minimal padding */
     width: 100%;
     max-width: 600px;
-    box-shadow:
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-    margin: 0 auto 20px auto;
+    box-shadow: none;
+    margin: 5px auto 0 auto;
     font-family: 'Poppins', 'Eczar', sans-serif;
     position: relative;
-    overflow: hidden;
     animation: slideDown 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -36,67 +26,124 @@
 }
 
 /* Header Section */
-.card-header {
+/* Header Section Moved to Main Header */
+/* Previous .card-header styles removed */
+
+/* Body Section */
+.card-body {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding-bottom: 15px;
-    background: transparent;
-    /* Reset background */
-    color: inherit;
-    /* Reset color */
-    padding: 0 0 15px 0;
-    /* Reset padding */
+    flex-direction: column;
+    gap: 12px;
 }
 
-.ward-info {
+.election-timing {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow wrapping on very small screens */
+    flex-direction: row;
+    /* Horizontal layout */
+    gap: 20px;
+    /* Space between Date and Time */
+    background-color: transparent;
+    /* No box */
+    padding: 0;
+    border: none;
+    justify-content: flex-start;
+    /* Left align */
+}
+
+.time-row {
     display: flex;
     align-items: center;
     gap: 8px;
-}
-
-.ward-icon {
-    color: #ea580c;
-    /* Saffron Orange */
-    filter: none;
-}
-
-.ward-badge {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: white;
-    padding: 6px 16px;
-    border-radius: 99px;
-    /* Pill shape */
     font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
-    border: none;
-    backdrop-filter: none;
-    text-shadow: none;
-}
-
-.share-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background-color: white;
-    color: #2563eb;
-    border: 1px solid #dbeafe;
-    padding: 6px 14px;
-    border-radius: 8px;
-    font-size: 0.85rem;
+    color: #4b5563;
+    /* Slightly softer grey */
     font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    /* White pill background for legibility */
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
 }
 
-.share-btn:hover {
-    background-color: #eff6ff;
+.icon {
+    color: #ef4444;
 }
+
+/* Candidate Promotion Section */
+.candidate-promo {
+    text-align: left;
+    /* Align left to match flow */
+    margin-top: 5px;
+}
+
+.promo-name {
+    font-size: 1.4rem;
+    color: #111827;
+    margin: 0 0 5px 0;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.promo-slogan-container {
+    background-color: #fff7ed;
+    /* Very light orange */
+    padding: 12px 15px;
+    border-radius: 8px;
+    border-left: 4px solid #f97316;
+    margin-top: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Subtle lift */
+}
+
+.promo-slogan {
+    margin: 0;
+    color: #9a3412;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    .election-card {
+        padding: 0 5px;
+        /* Minimal padding matches ballot unit */
+        margin: 10px auto;
+    }
+
+    .card-header {
+        margin-bottom: 10px;
+    }
+
+    .promo-name {
+        font-size: 1.25rem;
+    }
+
+    .promo-slogan {
+        font-size: 0.9rem;
+    }
+
+    .election-timing {
+        gap: 10px;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header Section */
+/* Duplicated Header Section Styles Removed */
 
 /* Body Section */
 .card-body {
@@ -134,13 +181,13 @@
 /* Candidate Promotion Section */
 .candidate-promo {
     text-align: center;
-    margin-top: 5px;
+    margin-top: 0;
 }
 
 .promo-name {
     font-size: 1.5rem;
     color: #111827;
-    margin: 0 0 8px 0;
+    margin: 0 0 2px 0;
     font-weight: 700;
     /* Optional: Add a subtle text shadow */
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);

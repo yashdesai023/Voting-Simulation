@@ -36,13 +36,23 @@ export const translations = {
     pressButton: "PRESS",
     // Info Card
     ward: "Ward / Prabhag",
-    electionDate: "Election Date: 15 January 2026",
+    // English
+    electionDate: "Election Date",
+    electionDateValue: "15 January 2026",
     votingTime: "Time: 7:00 AM to 6:00 PM",
     share: "Share",
     candidateNamePlaceholder: "Candidate Name",
     slogan: "Press the button opposite their name and symbol to make them victorious with a huge majority!",
     wardLabel: "Ward",
-    prabhagLabel: "Prabhag"
+    prabhagLabel: "Prabhag",
+    votedCandidateTitle: "Candidates you voted for",
+    participatingCandidates: "Participating Candidates",
+    // Share Message
+    shareHeader: "🚨 Voting Appeal 🚨",
+    shareCandidateLabel: "👤 Candidate",
+    shareWardLabel: "📍 Ward",
+    shareDateLabel: "🗓️ Date",
+    shareTimeLabel: "⏰ Time"
   }
 };
 
@@ -50,23 +60,41 @@ export const translations = {
 translations.mr = {
   ...translations.mr,
   ward: "प्रभाग / वार्ड",
-  electionDate: "निवडणूक दिनांक: १५ जानेवारी २०२६",
+  electionDate: "निवडणूक दिनांक",
+  electionDateValue: "१५ जानेवारी २०२६",
   votingTime: "वेळ: सकाळी ७:०० ते सायंकाळी ६:००",
   share: "शेअर करा",
   candidateNamePlaceholder: "उमेदवाराचे नाव",
   slogan: "यांना त्यांच्या नाव व चिन्हासमोरील बटन दाबून प्रचंड मताने विजयी करा!",
   wardLabel: "वार्ड",
-  prabhagLabel: "प्रभाग"
+  prabhagLabel: "प्रभाग",
+  votedCandidateTitle: "तुमचे मत दिलेले उमेदवार",
+  participatingCandidates: "सहभागी उमेदवार",
+  // Share Message
+  shareHeader: "🚨 मतदान आवाहन 🚨",
+  shareCandidateLabel: "👤 उमेदवार",
+  shareWardLabel: "📍 प्रभाग",
+  shareDateLabel: "🗓️ तारीख",
+  shareTimeLabel: "⏰ वेळ"
 };
 
 translations.hi = {
   ...translations.hi,
   ward: "वार्ड / प्रभाग",
-  electionDate: "चुनाव तारीख: १५ जनवरी २०२६",
+  electionDate: "चुनाव तारीख",
+  electionDateValue: "१५ जनवरी २०२६",
   votingTime: "समय: सुबह ७:०० से शाम ६:००",
   share: "शेयर करें",
   candidateNamePlaceholder: "उमेदवार का नाम",
   slogan: "इनके नाम और चुनाव चिन्ह के सामने वाला बटन दबाकर भारी मतों से विजयी बनाएं!",
   wardLabel: "वार्ड",
-  prabhagLabel: "प्रभाग"
+  prabhagLabel: "प्रभाग",
+  votedCandidateTitle: "आपके द्वारा वोट किए गए उम्मीदवार",
+  participatingCandidates: "प्रतिभागी उम्मीदवार",
+  // Share Message
+  shareHeader: "🚨 मतदान अपील 🚨",
+  shareCandidateLabel: "👤 उम्मीदवार",
+  shareWardLabel: "📍 वार्ड",
+  shareDateLabel: "🗓️ तारीख",
+  shareTimeLabel: "⏰ समय"
 };

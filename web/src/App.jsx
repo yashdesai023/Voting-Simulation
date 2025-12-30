@@ -122,7 +122,7 @@ const VotingApp = () => {
 
       return {
         name: isVisible ? assigned.name : "",
-        marathiName: isVisible ? assigned.marathiName : "",
+        marathiName: isVisible ? (assigned.name_marathi || assigned.marathiName) : "",
         symbol: symbolUrl,
         photo: photoUrl,
         hasPhoto: isVisible ? assigned.hasPhoto : false
@@ -224,9 +224,53 @@ const VotingApp = () => {
     );
   };
 
+  const handleShare = async () => {
+    const t = translations[language] || translations['en'];
+    // Determine Name (English vs Marathi)
+    const isLocalLang = language === 'mr' || language === 'hi';
+    const wardDisplayName = (isLocalLang && wardData?.name_marathi) ? wardData.name_marathi : (wardData?.name || "N/A");
+
+    // Determine candidate name to show (copied logic)
+    const assigned = activeCandidates[currentUnitIndex];
+    const displayCandidateName = assigned ? (isLocalLang ? (assigned.marathiName || assigned.name) : assigned.name) : t.candidateNamePlaceholder;
+
+    const shareText = `
+${t.shareHeader}
+
+${t.shareCandidateLabel}: ${displayCandidateName}
+${t.shareWardLabel}: ${wardDisplayName}
+
+${t.shareDateLabel}: ${t.electionDateValue}
+${t.shareTimeLabel}: ${t.votingTime}
+
+${t.slogan}
+    `.trim();
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Election - ${wardDisplayName}`,
+          text: shareText,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      // Fallback
+      navigator.clipboard.writeText(`${shareText}\n${window.location.href}`);
+      alert("Link copied to clipboard!");
+    }
+  };
+
   return (
     <>
-      <Header language={language} setLanguage={setLanguage} />
+      <Header
+        language={language}
+        setLanguage={setLanguage}
+        ward={wardData}
+        onShare={handleShare}
+      />
       <div className="app-container">
         <main className="units-container">
           {renderContent()}

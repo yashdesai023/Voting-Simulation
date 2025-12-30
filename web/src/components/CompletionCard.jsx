@@ -59,31 +59,56 @@ const CompletionCard = ({ ward, language, votedCandidate, allCandidates }) => {
                 </p>
 
                 {/* Vote Summary */}
-                <div className="vote-summary">
-                    <div className="summary-row">
-                        <span className="label">{t.ward}</span>
-                        <span className="value">{ward.name}</span>
-                    </div>
-                    <div className="summary-row">
-                        <span className="label">{t.electionDate}</span>
-                        <span className="value">15 Jan 2026</span>
-                    </div>
-
-                </div>
-
                 {/* All Candidates List */}
                 {allCandidates && Object.values(allCandidates).length > 0 && (
                     <div className="all-candidates-list">
-                        <h3>Participating Candidates</h3>
+                        <h3>{t.participatingCandidates}</h3>
                         <div className="candidates-grid">
-                            {Object.entries(allCandidates).sort((a, b) => parseInt(a[0]) - parseInt(b[0])).map(([idx, candidate]) => (
-                                <div key={idx} className="candidate-mini-card">
-                                    <span className="machine-label">Machine {parseInt(idx) + 1}</span>
-                                    <span className="cand-name">
-                                        {language === 'mr' || language === 'hi' ? (candidate.marathiName || candidate.name) : candidate.name}
-                                    </span>
-                                </div>
-                            ))}
+                            {Object.entries(allCandidates).sort((a, b) => parseInt(a[0]) - parseInt(b[0])).map(([idx, candidate]) => {
+                                return (
+                                    <div key={idx} className="voted-card" style={{ marginTop: '10px' }}>
+                                        {/* Left: Photo */}
+                                        <div className="voted-photo-wrapper">
+                                            {candidate.photo ? (
+                                                <img
+                                                    src={getImageUrl(candidate.collectionId, candidate.id, candidate.photo)}
+                                                    alt="Candidate"
+                                                    className="voted-photo"
+                                                />
+                                            ) : (
+                                                <div className="voted-photo-placeholder">
+                                                    {candidate.name?.charAt(0)}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Middle: Info */}
+                                        <div className="voted-info">
+                                            <h3 className="voted-name" style={{ fontSize: '1rem' }}>
+                                                {language === 'mr' || language === 'hi' ? (candidate.marathiName || candidate.name) : candidate.name}
+                                            </h3>
+                                            <div className="voted-position">
+                                                <span className="pos-label">{t.headerSrNo}</span> {parseInt(idx) + 1}
+                                            </div>
+                                        </div>
+
+                                        {/* Right: Symbol */}
+                                        <div className="voted-symbol-area">
+                                            {candidate.symbol && (
+                                                <img
+                                                    src={getImageUrl(candidate.collectionId, candidate.id, candidate.symbol)}
+                                                    alt="Symbol"
+                                                    className="voted-symbol"
+                                                />
+                                            )}
+                                            {/* Show check for everyone as requested */}
+                                            <div className="voted-check">
+                                                <CheckCircle size={24} color="white" fill="#22c55e" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 )}

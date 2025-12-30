@@ -30,7 +30,11 @@ body {
 
 @media (max-width: 600px) {
   body {
-    padding: 10px;
+    padding: 0;
+  }
+
+  .app-container {
+    padding: 10px 5px;
   }
 }
 
@@ -40,8 +44,10 @@ body {
   flex-direction: column;
   align-items: center;
   /* Horizontally center children */
-  gap: 20px;
-  padding: 20px;
+  gap: 5px;
+  /* Reduced gap */
+  padding: 10px 10px 0 10px;
+  /* Reduced top padding */
   margin: 0;
 }
 

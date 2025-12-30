@@ -7,20 +7,15 @@ const CandidateRow = ({ serialNo, name, marathiName, symbol, photo, hasPhoto, on
     const t = translations[language];
 
     // Parse Name for Multi-language (Format: English | Marathi)
-    // Parse Name: Priority -> Explicit Field -> Pipe Split -> Default
-    let displayName = name;
+    // Parse Name for Multi-language (Format: English | Marathi)
+    let englishName = name;
+    let regionalName = marathiName;
 
-    if (language === 'mr' || language === 'hi') {
-        if (marathiName) {
-            displayName = marathiName;
-        } else if (name && name.includes('|')) {
-            const parts = name.split('|');
-            if (parts[1]) displayName = parts[1].trim();
-        }
-    } else {
-        // English
-        if (name && name.includes('|')) {
-            displayName = name.split('|')[0].trim();
+    if (name && name.includes('|')) {
+        const parts = name.split('|');
+        englishName = parts[0].trim();
+        if (!regionalName && parts[1]) {
+            regionalName = parts[1].trim();
         }
     }
 
@@ -29,7 +24,10 @@ const CandidateRow = ({ serialNo, name, marathiName, symbol, photo, hasPhoto, on
             {/* Paper Ballot Area */}
             <div className="paper-section" style={{ backgroundColor: rowColor || '#f3f4f6' }}>
                 <div className="serial-no">{serialNo}</div>
-                <div className="candidate-name">{displayName}</div>
+                <div className="candidate-name">
+                    <div className="name-en">{englishName}</div>
+                    {regionalName && <div className="name-regional">{regionalName}</div>}
+                </div>
                 <div className="candidate-photo">
                     {hasPhoto ? (
                         photo ? <img src={photo} alt="Candidate" className="row-img-photo" /> : <div className="photo-placeholder">👤</div>

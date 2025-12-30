@@ -1,42 +1,117 @@
-.evm-header {
-    background: linear-gradient(90deg, #f97316 0%, #ea580c 100%);
-    /* Orange Gradient */
-    border-bottom: none;
-    padding: 10px 20px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-
-    /* Sticky Positioning */
+/* Main Sticky Wrapper */
+.header-section {
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 
+.evm-header {
+    background: #ed5a18;
+    /* Solid orange from screenshot */
+    border-bottom: none;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: auto;
+    min-height: 60px;
     width: 100%;
     color: white;
-    /* Make text white */
 }
 
-.logo-section {
+.header-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .company-name {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.3rem;
+    font-weight: 700;
+    /* Bolder */
     color: white;
-    /* Ensure title is white */
     margin: 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
 }
 
-.controls-section {
+.header-right {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+/* New Info Bar (White) */
+.info-bar {
+    background-color: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: center;
+    /* Center the content */
+    align-items: center;
+    width: 100%;
+    position: relative;
+    /* For absolute positioning of share button */
+}
+
+.ward-badge {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    /* Orange Gradient */
+    color: white;
+    padding: 6px 16px;
+    /* Slightly larger for prominence */
+    border-radius: 20px;
+    /* Pill shape looks better centered */
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 4px rgba(249, 115, 22, 0.3);
+}
+
+.info-share-btn {
+    position: absolute;
+    /* Stick to right */
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: white;
+    color: #ed5a18;
+    /* Theme Orange */
+    border: 1px solid #ed5a18;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.info-share-btn:hover {
+    background-color: #ed5a18;
+    color: white;
+    box-shadow: 0 2px 4px rgba(237, 90, 24, 0.2);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    .company-name {
+        font-size: 1.1rem;
+    }
+
+    .share-text {
+        display: none;
+        /* Hide 'Share' text on mobile, keep icon */
+    }
+
+    .info-bar {
+        padding: 5px 10px;
+    }
+
+    .ward-badge {
+        font-size: 0.8rem;
+    }
 }
 
 .lang-dropdown-wrapper {
@@ -49,17 +124,19 @@
     padding: 8px 12px;
     font-size: 0.95rem;
     color: #374151;
-    background-color: #f9fafb;
-    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    /* Pure white */
+    border: none;
+    /* No border usually looks cleaner on orange, or very subtle */
     border-radius: 6px;
     cursor: pointer;
     font-family: inherit;
     outline: none;
     transition: all 0.2s;
-    appearance: none;
+    appearance: auto;
     /* Custom arrow usually needs more CSS or SVG, but browser default is okay for now, 
        though we hid it with appearance: none, so let's add padding-right for custom arrow or revert. */
-    appearance: auto;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .lang-select:hover {

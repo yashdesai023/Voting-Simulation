@@ -48,6 +48,22 @@
     padding-left: 15px;
     border-right: 1px solid #bbb;
     font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.2;
+}
+
+.name-en {
+    color: #000;
+}
+
+.name-regional {
+    font-size: 0.95rem;
+    /* Slightly smaller than English name */
+    color: #000;
+    font-weight: 500;
+    margin-top: 2px;
 }
 
 .candidate-photo {
