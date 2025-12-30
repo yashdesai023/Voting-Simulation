@@ -209,6 +209,7 @@ const VotingApp = () => {
           ward={wardData}
           candidateName={displayCandidateName}
           language={language}
+          unitLetter={unitLabel}
         />
         <BallotUnit
           key={currentUnitIndex}

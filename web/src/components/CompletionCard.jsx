@@ -71,7 +71,7 @@ const CompletionCard = ({ ward, language, votedCandidate, allCandidates, onShare
                                                 {language === 'mr' || language === 'hi' ? (candidate.marathiName || candidate.name) : candidate.name}
                                             </h3>
                                             <div className="voted-position">
-                                                <span className="pos-label">{t.headerSrNo}</span> {parseInt(idx) + 1}
+                                                <span className="pos-label">{t.headerSrNo}</span> {candidate.index || (parseInt(idx) + 1)}
                                             </div>
                                         </div>
 

@@ -17,7 +17,8 @@ const ManageWard = () => {
     const [editFormData, setEditFormData] = useState({
         name: '',
         name_marathi: '',
-        prabhag_ward: 'Ward' // Default to Ward
+        prabhag_ward: 'Ward', // Default to Ward
+        prabhag_number: ''
     });
 
     useEffect(() => {
@@ -27,7 +28,7 @@ const ManageWard = () => {
             if (data) {
                 setWard(data);
                 setCandidates(data.candidates || {});
-                
+
                 // Normalize Ward/Prabhag to Capitalized case for Select match
                 let normalizedType = data.prabhag_ward || 'Ward';
                 // Capitalize first letter just in case backend has 'ward'
@@ -35,8 +36,9 @@ const ManageWard = () => {
 
                 setEditFormData({
                     name: data.name || '',
-                    name_marathi: data.name_marathi || '', 
-                    prabhag_ward: normalizedType
+                    name_marathi: data.name_marathi || '',
+                    prabhag_ward: normalizedType,
+                    prabhag_number: data.prabhag_number || ''
                 });
             } else {
                 navigate('/admin');
@@ -224,7 +226,7 @@ const ManageWard = () => {
 
             {/* Ward Configuration */}
             <div className="ward-settings-card">
-                <h2>Ward Configuration</h2>
+                <h2>{ward.name} Configuration</h2>
                 <div className="form-row">
                     <div className="form-group half">
                         <label>Ward Name (English)</label>
@@ -255,12 +257,18 @@ const ManageWard = () => {
                         </select>
                     </div>
                     <div className="form-group half">
-                        {/* Spacer for alignment */}
+                        <label>Prabhag Number</label>
+                        <input
+                            type="text"
+                            value={editFormData.prabhag_number}
+                            onChange={(e) => setEditFormData({ ...editFormData, prabhag_number: e.target.value })}
+                            placeholder="e.g. 12 or 4"
+                        />
                     </div>
                 </div>
-                
+
                 <div className="form-actions">
-                     <button className="btn btn-primary" onClick={handleUpdateWardDetails}>
+                    <button className="btn btn-primary" onClick={handleUpdateWardDetails}>
                         <Save size={16} /> Update Details
                     </button>
                 </div>
@@ -357,14 +365,7 @@ const ManageWard = () => {
                                         />
                                     </div>
                                     <div className="form-group half">
-                                        {/* Spacer or another field if needed, otherwise empty to keep layout? 
-                                            Actually, let's keep it clean. Just one Serial No. 
-                                            The layout is .form-row with .half. If we remove one, the other stretches?
-                                            Let's keep the row but maybe put English Name here?
-                                            No, English Name is below. 
-                                            Let's just leave the space or make Serial No full width?
-                                            Full width for Serial No is fine for this row.
-                                        */}
+                                        {/* Spacer */}
                                     </div>
                                 </div>
 
