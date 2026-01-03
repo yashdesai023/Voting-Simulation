@@ -65,7 +65,7 @@
     border-radius: 20px;
     /* Pill shape looks better centered */
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     box-shadow: 0 2px 4px rgba(249, 115, 22, 0.3);
 }
 
@@ -110,7 +110,7 @@
     }
 
     .ward-badge {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 }
 

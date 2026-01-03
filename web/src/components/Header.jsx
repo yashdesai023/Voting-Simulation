@@ -40,7 +40,7 @@ const Header = ({ language, setLanguage, ward, onShare }) => {
             {wardDisplayName && (
                 <div className="info-bar">
                     <div className="ward-badge">
-                        {unitLabel}: {wardDisplayName}
+                        {wardDisplayName}
                     </div>
 
                     <button className="info-share-btn" onClick={onShare}>
