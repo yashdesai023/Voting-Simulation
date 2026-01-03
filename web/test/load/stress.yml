@@ -1,0 +1,28 @@
+config:
+  target: "http://3.145.11.27" # New AWS EC2 IP (t3.large)
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 50
+      name: "Ramp up load"
+    - duration: 60
+      arrivalRate: 50
+      name: "Sustained high load"
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Fetch Ward Data"
+    flow:
+      - get:
+          url: "/api/collections/wards/records"
+          qs:
+            filter: "status='Active'"
+  - name: "Fetch Candidates"
+    flow:
+      - get:
+          url: "/api/collections/candidates/records"
+          qs:
+            page: 1
+            perPage: 100

@@ -1,0 +1,337 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.Fetch Ward Data": 2274,
+      "vusers.created": 4650,
+      "http.requests": 4650,
+      "vusers.created_by_name.Fetch Candidates": 2376,
+      "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 2274,
+      "errors.ETIMEDOUT": 4650,
+      "vusers.failed": 4650,
+      "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 2376
+    },
+    "rates": {
+      "http.request_rate": 36
+    },
+    "firstCounterAt": 1767419563522,
+    "lastCounterAt": 1767419693265,
+    "firstMetricAt": 1767419563522,
+    "lastMetricAt": 1767419693265,
+    "period": 1767419690000,
+    "summaries": {},
+    "histograms": {}
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Ward Data": 31,
+        "vusers.created": 52,
+        "http.requests": 52,
+        "vusers.created_by_name.Fetch Candidates": 21
+      },
+      "rates": {
+        "http.request_rate": 8
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419563522,
+      "lastCounterAt": 1767419569907,
+      "firstMetricAt": 1767419563522,
+      "lastMetricAt": 1767419569907,
+      "period": "1767419560000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Ward Data": 62,
+        "vusers.created": 138,
+        "http.requests": 138,
+        "vusers.created_by_name.Fetch Candidates": 76,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 31,
+        "errors.ETIMEDOUT": 52,
+        "vusers.failed": 52,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 21
+      },
+      "rates": {
+        "http.request_rate": 15
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419570086,
+      "lastCounterAt": 1767419579983,
+      "firstMetricAt": 1767419570086,
+      "lastMetricAt": 1767419579983,
+      "period": "1767419570000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 62,
+        "errors.ETIMEDOUT": 138,
+        "vusers.failed": 138,
+        "vusers.created_by_name.Fetch Ward Data": 119,
+        "vusers.created": 213,
+        "http.requests": 213,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 76,
+        "vusers.created_by_name.Fetch Candidates": 94
+      },
+      "rates": {
+        "http.request_rate": 22
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419580045,
+      "lastCounterAt": 1767419589987,
+      "firstMetricAt": 1767419580045,
+      "lastMetricAt": 1767419589987,
+      "period": "1767419580000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Candidates": 138,
+        "vusers.created": 288,
+        "http.requests": 288,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 119,
+        "errors.ETIMEDOUT": 213,
+        "vusers.failed": 213,
+        "vusers.created_by_name.Fetch Ward Data": 150,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 94
+      },
+      "rates": {
+        "http.request_rate": 29
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419590005,
+      "lastCounterAt": 1767419599962,
+      "firstMetricAt": 1767419590005,
+      "lastMetricAt": 1767419599962,
+      "period": "1767419590000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Candidates": 186,
+        "vusers.created": 367,
+        "http.requests": 367,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 138,
+        "errors.ETIMEDOUT": 288,
+        "vusers.failed": 288,
+        "vusers.created_by_name.Fetch Ward Data": 181,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 150
+      },
+      "rates": {
+        "http.request_rate": 37
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419600005,
+      "lastCounterAt": 1767419609985,
+      "firstMetricAt": 1767419600005,
+      "lastMetricAt": 1767419609985,
+      "period": "1767419600000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Ward Data": 193,
+        "vusers.created": 436,
+        "http.requests": 436,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 185,
+        "errors.ETIMEDOUT": 365,
+        "vusers.failed": 365,
+        "vusers.created_by_name.Fetch Candidates": 243,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 180
+      },
+      "rates": {
+        "http.request_rate": 45
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419610017,
+      "lastCounterAt": 1767419619992,
+      "firstMetricAt": 1767419610017,
+      "lastMetricAt": 1767419619992,
+      "period": "1767419610000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 194,
+        "errors.ETIMEDOUT": 438,
+        "vusers.failed": 438,
+        "vusers.created_by_name.Fetch Ward Data": 253,
+        "vusers.created": 497,
+        "http.requests": 497,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 244,
+        "vusers.created_by_name.Fetch Candidates": 244
+      },
+      "rates": {
+        "http.request_rate": 50
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419620007,
+      "lastCounterAt": 1767419629968,
+      "firstMetricAt": 1767419620007,
+      "lastMetricAt": 1767419629968,
+      "period": "1767419620000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Candidates": 257,
+        "vusers.created": 500,
+        "http.requests": 500,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 253,
+        "errors.ETIMEDOUT": 497,
+        "vusers.failed": 497,
+        "vusers.created_by_name.Fetch Ward Data": 243,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 244
+      },
+      "rates": {
+        "http.request_rate": 50
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419630009,
+      "lastCounterAt": 1767419639974,
+      "firstMetricAt": 1767419630009,
+      "lastMetricAt": 1767419639974,
+      "period": "1767419630000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Candidates": 252,
+        "vusers.created": 500,
+        "http.requests": 500,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 257,
+        "errors.ETIMEDOUT": 500,
+        "vusers.failed": 500,
+        "vusers.created_by_name.Fetch Ward Data": 248,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 243
+      },
+      "rates": {
+        "http.request_rate": 50
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419640020,
+      "lastCounterAt": 1767419649987,
+      "firstMetricAt": 1767419640020,
+      "lastMetricAt": 1767419649987,
+      "period": "1767419640000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Ward Data": 265,
+        "vusers.created": 500,
+        "http.requests": 500,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 252,
+        "errors.ETIMEDOUT": 500,
+        "vusers.failed": 500,
+        "vusers.created_by_name.Fetch Candidates": 235,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 248
+      },
+      "rates": {
+        "http.request_rate": 50
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419650020,
+      "lastCounterAt": 1767419659969,
+      "firstMetricAt": 1767419650020,
+      "lastMetricAt": 1767419659969,
+      "period": "1767419650000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Candidates": 273,
+        "vusers.created": 500,
+        "http.requests": 500,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 265,
+        "errors.ETIMEDOUT": 500,
+        "vusers.failed": 500,
+        "vusers.created_by_name.Fetch Ward Data": 227,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 235
+      },
+      "rates": {
+        "http.request_rate": 50
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419660020,
+      "lastCounterAt": 1767419669970,
+      "firstMetricAt": 1767419660020,
+      "lastMetricAt": 1767419669970,
+      "period": "1767419660000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Candidates": 272,
+        "vusers.created": 500,
+        "http.requests": 500,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 273,
+        "errors.ETIMEDOUT": 500,
+        "vusers.failed": 500,
+        "vusers.created_by_name.Fetch Ward Data": 228,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 227
+      },
+      "rates": {
+        "http.request_rate": 50
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419670020,
+      "lastCounterAt": 1767419679971,
+      "firstMetricAt": 1767419670020,
+      "lastMetricAt": 1767419679971,
+      "period": "1767419670000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.Fetch Candidates": 85,
+        "vusers.created": 159,
+        "http.requests": 159,
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 272,
+        "errors.ETIMEDOUT": 500,
+        "vusers.failed": 500,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 228,
+        "vusers.created_by_name.Fetch Ward Data": 74
+      },
+      "rates": {
+        "http.request_rate": 50
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1767419680018,
+      "lastCounterAt": 1767419689970,
+      "firstMetricAt": 1767419680018,
+      "lastMetricAt": 1767419689970,
+      "period": "1767419680000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "plugins.metrics-by-endpoint./api/collections/candidates/records.errors.ETIMEDOUT": 85,
+        "errors.ETIMEDOUT": 159,
+        "vusers.failed": 159,
+        "plugins.metrics-by-endpoint./api/collections/wards/records.errors.ETIMEDOUT": 74
+      },
+      "rates": {},
+      "firstCounterAt": 1767419690035,
+      "lastCounterAt": 1767419693265,
+      "firstMetricAt": 1767419690035,
+      "lastMetricAt": 1767419693265,
+      "period": "1767419690000",
+      "summaries": {},
+      "histograms": {}
+    }
+  ]
+}
