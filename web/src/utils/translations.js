@@ -39,20 +39,24 @@ export const translations = {
     // English
     electionDate: "Election Date",
     electionDateValue: "15 January 2026",
-    votingTime: "Time: 7:00 AM to 6:00 PM",
+    votingTime: "7:30 AM to 5:30 PM",
     share: "Share",
     candidateNamePlaceholder: "Candidate Name",
-    slogan: "Press the button opposite their name and symbol to make them victorious with a huge majority!",
+    slogan: "Press the button opposite the candidate’s name and symbol to support them and help make them victorious with a huge majority.",
     wardLabel: "Ward",
     prabhagLabel: "Prabhag",
     votedCandidateTitle: "Candidates you voted for",
-    participatingCandidates: "Participating Candidates",
+    participatingCandidates: "👥 Participating Candidates",
     // Share Message
-    shareHeader: "🚨 Voting Appeal 🚨",
-    shareCandidateLabel: "👤 Candidate",
+    shareHeader: "🗳️ VOTING APPEAL | PLEASE VOTE & SHARE 🇮🇳",
+    shareCandidateLabel: "👤 Candidate", // Not used in new format but keeping for safety
     shareWardLabel: "📍 Ward",
+    sharePrabhagLabel: "📍 Prabhag",
     shareDateLabel: "🗓️ Date",
-    shareTimeLabel: "⏰ Time"
+    shareTimeLabel: "⏰ Time",
+    shareSloganTitle: "👉 Your vote is your power!",
+    shareVoteHere: "🔗 Vote Here:",
+    shareFooter: "🙏 Please vote responsibly and share this message with your family & friends to encourage maximum participation."
   }
 };
 
@@ -62,39 +66,45 @@ translations.mr = {
   ward: "प्रभाग / वार्ड",
   electionDate: "निवडणूक दिनांक",
   electionDateValue: "१५ जानेवारी २०२६",
-  votingTime: "वेळ: सकाळी ७:०० ते सायंकाळी ६:००",
+  votingTime: "सकाळी ७:३० ते सायंकाळी ५:३०",
   share: "शेअर करा",
   candidateNamePlaceholder: "उमेदवाराचे नाव",
-  slogan: "यांना त्यांच्या नाव व चिन्हासमोरील बटन दाबून प्रचंड मताने विजयी करा!",
+  slogan: "उमेदवाराच्या नाव व चिन्हासमोरील बटन दाबून त्यांना प्रचंड मतांनी विजयी करा.",
   wardLabel: "वार्ड",
   prabhagLabel: "प्रभाग",
   votedCandidateTitle: "तुमचे मत दिलेले उमेदवार",
-  participatingCandidates: "सहभागी उमेदवार",
+  participatingCandidates: "👥 सहभागी उमेदवार",
   // Share Message
-  shareHeader: "🚨 मतदान आवाहन 🚨",
-  shareCandidateLabel: "👤 उमेदवार",
+  shareHeader: "🗳️ मतदान आवाहन | कृपया मतदान करा व शेअर करा 🇮🇳",
   shareWardLabel: "📍 प्रभाग",
+  sharePrabhagLabel: "📍 प्रभाग", // User used "Prabhag" for Marathi Ward line
   shareDateLabel: "🗓️ तारीख",
-  shareTimeLabel: "⏰ वेळ"
+  shareTimeLabel: "⏰ वेळ",
+  shareSloganTitle: "👉 आपले मत, आपली ताकद!",
+  shareVoteHere: "🔗 मतदानासाठी लिंक:",
+  shareFooter: "🙏 कृपया जबाबदारीने मतदान करा व हा संदेश जास्तीत जास्त लोकांपर्यंत पोहोचवा."
 };
 
 translations.hi = {
   ...translations.hi,
   ward: "वार्ड / प्रभाग",
   electionDate: "चुनाव तारीख",
-  electionDateValue: "१५ जनवरी २०२६",
-  votingTime: "समय: सुबह ७:०० से शाम ६:००",
+  electionDateValue: "15 जनवरी 2026",
+  votingTime: "सुबह 7:30 बजे से शाम 5:30 बजे तक",
   share: "शेयर करें",
   candidateNamePlaceholder: "उमेदवार का नाम",
-  slogan: "इनके नाम और चुनाव चिन्ह के सामने वाला बटन दबाकर भारी मतों से विजयी बनाएं!",
+  slogan: "उम्मीदवार के नाम और चिन्ह के सामने दिए गए बटन को दबाकर उन्हें भारी बहुमत से विजयी बनाएं।",
   wardLabel: "वार्ड",
   prabhagLabel: "प्रभाग",
   votedCandidateTitle: "आपके द्वारा वोट किए गए उम्मीदवार",
-  participatingCandidates: "प्रतिभागी उम्मीदवार",
+  participatingCandidates: "👥 प्रतिभागी उम्मीदवार",
   // Share Message
-  shareHeader: "🚨 मतदान अपील 🚨",
-  shareCandidateLabel: "👤 उम्मीदवार",
+  shareHeader: "🗳️ मतदान अपील | कृपया वोट करें और शेयर करें 🇮🇳",
   shareWardLabel: "📍 वार्ड",
+  sharePrabhagLabel: "📍 प्रभाग",
   shareDateLabel: "🗓️ तारीख",
-  shareTimeLabel: "⏰ समय"
+  shareTimeLabel: "⏰ समय",
+  shareSloganTitle: "👉 आपका वोट, आपकी शक्ति!",
+  shareVoteHere: "🔗 वोट करने के लिए लिंक:",
+  shareFooter: "🙏 कृपया जिम्मेदारी से मतदान करें और इस संदेश को अधिक से अधिक लोगों तक साझा करें।"
 };

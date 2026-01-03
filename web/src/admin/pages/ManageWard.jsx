@@ -257,7 +257,7 @@ const ManageWard = () => {
                         </select>
                     </div>
                     <div className="form-group half">
-                        <label>Prabhag Number</label>
+                        <label>{editFormData.prabhag_ward === 'Prabhag' ? 'Prabhag Number' : 'Ward Number'}</label>
                         <input
                             type="text"
                             value={editFormData.prabhag_number}

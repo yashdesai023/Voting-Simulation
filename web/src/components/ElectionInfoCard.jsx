@@ -15,7 +15,7 @@ const ElectionInfoCard = ({ ward, candidateName, language, unitLetter }) => {
                 <div className="election-timing">
                     <div className="time-row">
                         <Calendar size={16} className="icon" />
-                        <span>{t.electionDate}</span>
+                        <span>{t.electionDate}: {t.electionDateValue}</span>
                     </div>
                     <div className="time-row">
                         <Clock size={16} className="icon" />
@@ -29,7 +29,10 @@ const ElectionInfoCard = ({ ward, candidateName, language, unitLetter }) => {
                         {unitLetter && <span className="unit-letter-badge"> {unitLetter} </span>}
                         {ward?.prabhag_number && (
                             <span className="prabhag-badge">
-                                ({language === 'mr' ? 'प्रभाग क्र.' : 'Prabhag No.'} {ward.prabhag_number})
+                                ({ward.prabhag_ward === 'Prabhag'
+                                    ? (language === 'mr' ? 'प्रभाग क्र.' : 'Prabhag No.')
+                                    : (language === 'mr' ? 'वार्ड क्र.' : 'Ward No.')
+                                } {ward.prabhag_number})
                             </span>
                         )}
                     </h2>

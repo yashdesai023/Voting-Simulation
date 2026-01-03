@@ -230,16 +230,39 @@ const VotingApp = () => {
     const t = translations[language] || translations['en'];
     // Determine Name (English vs Marathi)
     const isLocalLang = language === 'mr' || language === 'hi';
-    const wardDisplayName = (isLocalLang && wardData?.name_marathi) ? wardData.name_marathi : (wardData?.name || "N/A");
+    const wardName = (isLocalLang && wardData?.name_marathi) ? wardData.name_marathi : (wardData?.name || "N/A");
 
-    // Generate List of Candidates
+    // Determine Ward/Prabhag Label and Format
+    // Format: "📍 Ward: Navi Mumbai – Prabhag No. 04" 
+    // We need to construct: [Label]: [WardName] – [UnitType] [Number]
+
+    // First, determine if we are showing Ward or Prabhag label
+    const isPrabhag = wardData.prabhag_ward === 'Prabhag';
+    const locationLabel = isPrabhag ? t.sharePrabhagLabel : t.shareWardLabel;
+
+    // Construct the second part "Prabhag No. 04"
+    const unitTypeLabel = isPrabhag
+      ? (isLocalLang ? 'प्रभाग क्र.' : 'Prabhag No.')
+      : (isLocalLang ? 'वार्ड क्र.' : 'Ward No.');
+
+    // Pad number with 0 if single digit (e.g. 4 -> 04)
+    const padNum = (num) => num.toString().padStart(2, '0');
+    const unitNum = wardData.prabhag_number ? padNum(wardData.prabhag_number) : '';
+
+    const locationLine = `${locationLabel}: ${wardName} – ${unitTypeLabel} ${unitNum}`;
+
+    // Candidate List with Emojis
+    const numberEmojis = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
+
     let candidatesListText = "";
     if (activeCandidates) {
       candidatesListText = Object.entries(activeCandidates)
         .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
         .map(([idx, candidate]) => {
+          const serial = parseInt(idx) + 1;
+          const emoji = numberEmojis[serial] || `${serial}.`; // Fallback for > 10
           const name = isLocalLang ? (candidate.marathiName || candidate.name) : candidate.name;
-          return `${parseInt(idx) + 1}. ${name}`;
+          return `${emoji} ${name}`;
         })
         .join('\n');
     }
@@ -247,28 +270,36 @@ const VotingApp = () => {
     const shareText = `
 ${t.shareHeader}
 
-${t.shareWardLabel}: ${wardDisplayName}
-${t.shareDateLabel}: ${t.electionDateValue} | ${t.shareTimeLabel}: ${t.votingTime}
+${locationLine}
+${t.shareDateLabel}: ${t.electionDateValue}
+${t.shareTimeLabel}: ${t.votingTime}
 
-${t.participatingCandidates}:
+${t.participatingCandidates}
+
 ${candidatesListText}
 
+${t.shareSloganTitle}
 ${t.slogan}
+
+${t.shareVoteHere}
+${window.location.href}
+
+${t.shareFooter}
     `.trim();
 
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Election - ${wardDisplayName}`,
+          title: `Election - ${wardName}`,
           text: shareText,
-          url: window.location.href,
+          url: window.location.href, // Some apps use this, some use text
         });
       } catch (err) {
         console.log('Error sharing:', err);
       }
     } else {
       // Fallback
-      navigator.clipboard.writeText(`${shareText}\n${window.location.href}`);
+      navigator.clipboard.writeText(shareText);
       alert("Link copied to clipboard!");
     }
   };
