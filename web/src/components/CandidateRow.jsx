@@ -3,10 +3,9 @@ import React from 'react';
 import './CandidateRow.css';
 import { translations } from '../utils/translations';
 
-const CandidateRow = ({ serialNo, name, marathiName, symbol, photo, hasPhoto, onVote, isVoted, language, rowColor }) => {
+const CandidateRow = ({ serialNo, name, marathiName, symbol, photo, hasPhoto, onVote, isVoted, language, rowColor, isDisabled }) => {
     const t = translations[language];
 
-    // Parse Name for Multi-language (Format: English | Marathi)
     // Parse Name for Multi-language (Format: English | Marathi)
     let englishName = name;
     let regionalName = marathiName;
@@ -42,9 +41,9 @@ const CandidateRow = ({ serialNo, name, marathiName, symbol, photo, hasPhoto, on
             <div className="machine-section">
                 <div className={`led ${isVoted ? 'led-on' : ''}`}></div>
                 <button
-                    className="vote-btn"
-                    onClick={() => onVote(serialNo)}
-                    disabled={isVoted || !name} // Disable if voted OR if no candidate name
+                    className={`vote-btn ${isDisabled ? 'vote-btn-disabled' : ''}`}
+                    onClick={() => !isDisabled && onVote(serialNo)}
+                    disabled={isVoted || !name || isDisabled}
                 >
                     {name && <span className="btn-inner">{t.pressButton}</span>}
                 </button>
@@ -54,4 +53,3 @@ const CandidateRow = ({ serialNo, name, marathiName, symbol, photo, hasPhoto, on
 };
 
 export default CandidateRow;
-

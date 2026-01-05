@@ -1,15 +1,28 @@
 .election-card {
     /* Removed Glass/Card Effect */
-    background: transparent;
+    background: #f3f4f6;
+    /* Match app background or white to cover scrolled content */
     border: none;
-    padding: 0 10px;
+    padding: 10px 10px;
+    /* Add some top padding */
     /* Minimal padding */
     width: 100%;
     max-width: 600px;
-    box-shadow: none;
-    margin: 5px auto 0 auto;
-    font-family: 'Poppins', 'Eczar', sans-serif;
-    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    /* Add shadow for separation */
+    margin: 0 auto;
+    /* Remove top margin */
+    font-family: 'Poppins',
+        'Eczar',
+        sans-serif;
+
+    /* Sticky Positioning */
+    position: sticky;
+    top: 108px;
+    /* Approx height of Header + InfoBar. Adjust as needed. */
+    z-index: 900;
+    /* Below Header (1000) but above content */
+
     animation: slideDown 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 

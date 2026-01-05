@@ -1,26 +1,33 @@
-.ballot-unit {
+/* Main Container */
+.ballot-unit-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    position: relative;
+    /* For positioning footer/lamps if needed */
+}
+
+/* The Grey Plastic Casing */
+.ballot-unit-casing {
     background-color: #d1d5db;
     /* Main casing grey */
     border: 1px solid #9ca3af;
     border-radius: 12px;
-    /* Sharper corners */
     box-shadow:
         -5px 0 10px rgba(0, 0, 0, 0.1),
-        /* Left shadow */
         5px 0 10px rgba(0, 0, 0, 0.1),
-        /* Right shadow */
         0 10px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 600px;
-    /* Responsive width */
-    margin: 20px auto;
-    position: relative;
     padding: 40px 10px 40px 10px;
     /* Space for top/bottom latches */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* Gap BETWEEN sections within the machine */
 }
 
-/* Top Latch/Connector */
-.ballot-unit::before {
+/* Top Latch/Connector - attached to CASING */
+.ballot-unit-casing::before {
     content: '';
     position: absolute;
     top: 0;
@@ -28,13 +35,12 @@
     width: 60px;
     height: 25px;
     background-color: #0f3a7e;
-    /* Dark Blue Latch */
     border-radius: 0 0 4px 4px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Bottom Latch/Connector */
-.ballot-unit::after {
+/* Bottom Latch/Connector - attached to CASING */
+.ballot-unit-casing::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -42,21 +48,59 @@
     width: 60px;
     height: 25px;
     background-color: #0f3a7e;
-    /* Dark Blue Latch */
     border-radius: 4px 4px 0 0;
     box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* The visual separation between Paper Section and Buttons */
+/* Section Block */
+.section-block {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: opacity 0.3s;
+}
+
+.section-blocked {
+    opacity: 0.5;
+    pointer-events: none;
+    /* Disable interaction */
+    filter: grayscale(1);
+    border: 2px dashed #666;
+    /* Visual indicator */
+}
+
+.blocked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    /* Above content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.blocked-text {
+    background-color: #444;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+/* Reused Classes */
 .candidates-list {
     display: flex;
     flex-direction: column;
     background-color: #e5e7eb;
-    /* Inner frame */
     border: 1px solid #999;
 }
 
-/* Un-hiding header as per request */
 .bu-header {
     display: flex;
     background-color: #d1d5db;
@@ -65,8 +109,8 @@
     font-size: 0.9rem;
     color: #000;
     padding: 0;
-    /* Removing padding to let children handle it matching row */
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    /* Connect to list directly */
 }
 
 .unit-branding-row {
@@ -74,20 +118,23 @@
     padding: 2px 0;
     border-bottom: 1px solid #9ca3af;
     background-color: #e5e7eb;
-    /* Default fallback */
 }
 
 .unit-label-text {
-    font-size: 1.0rem;
-    font-weight: 700;
-    color: #000;
+    font-size: 1.5rem;
+    /* Larger as per image */
+    font-weight: 800;
+    color: #4b5563;
+    /* Dark Grey like in image 'अ.' */
+    display: block;
+    text-align: left;
+    padding-left: 10px;
 }
 
 /* Header Row (Sr No, Name...) */
 .header-paper {
     flex: 1;
     background-color: transparent;
-    /* Actually header usually stays grey */
     margin-right: 12px;
     display: flex;
     align-items: center;
@@ -109,19 +156,16 @@
     font-weight: bold;
     align-items: center;
     justify-content: center;
-    /* Default center */
 }
 
 .h-sr {
     width: 30px;
     justify-content: center;
-    /* Center align Sr No */
 }
 
 .h-name {
     flex: 1;
     justify-content: flex-start;
-    /* Align left but with padding */
     padding-left: 15px;
 }
 
@@ -131,7 +175,6 @@
 
 .h-symbol {
     width: 50px;
-    /* Match Row CSS (was 40px) */
 }
 
 .h-btn {
@@ -139,12 +182,15 @@
     text-align: center;
 }
 
-/* Mobile Header Adjustments */
+/* Mobile Adjustments */
 @media (max-width: 600px) {
-    .ballot-unit {
+    .ballot-unit-container {
         margin: 0 auto;
         width: 100%;
         max-width: 100%;
+    }
+
+    .ballot-unit-casing {
         border-radius: 0;
         border-left: none;
         border-right: none;
@@ -162,7 +208,6 @@
 
     .h-sr {
         width: 35px;
-        /* More space for Sr No */
         font-size: 0.8rem;
     }
 
@@ -179,18 +224,9 @@
     .h-name {
         font-size: 0.8rem;
         padding-left: 8px;
-        /* Reduced padding for mobile but kept separation */
     }
 }
 
 .bu-footer {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    /* "Ready" lamp is usually near top right or top left on different models. 
-     Reference image has LEDs on right. We'll place Ready lamp discreetly or hide if not in image.
-     The uploaded image shows LEDs for candidates. "Ready" might be the top one? 
-     No, the image is a generic labeled diagram. I'll stick to the candidate rows being the main focus.
-  */
     display: none;
 }

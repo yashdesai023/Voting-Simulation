@@ -12,6 +12,7 @@ import Login from './admin/pages/Login';
 import { WardProvider, useWard } from './context/WardContext';
 import { translations } from './utils/translations';
 import { playSuccessBeep, playVoteSuccessAudio } from './utils/audio';
+import { smoothScrollTo } from './utils/scroll'; // Import custom scroll
 
 import ElectionInfoCard from './components/ElectionInfoCard';
 import CompletionCard from './components/CompletionCard';
@@ -27,7 +28,9 @@ const VotingApp = () => {
   const [votedSerial, setVotedSerial] = useState(null);
   const [votedCandidate, setVotedCandidate] = useState(null); // Track who was voted for
   const [currentUnitIndex, setCurrentUnitIndex] = useState(0);
+  const [activeMachineId, setActiveMachineId] = useState(1); // Added missing state
   const [isProcessComplete, setIsProcessComplete] = useState(false);
+  const [visibleUnitIndex, setVisibleUnitIndex] = useState(0); // Track visible section
 
   useEffect(() => {
     if (wardId) {
@@ -75,6 +78,43 @@ const VotingApp = () => {
     }
   }, [wardData]);
 
+  const activeCandidates = wardData?.candidates || {};
+
+  // Logic to distinguish valid vs blocked sections
+  // This definition is now correctly placed after activeCandidates
+  const isSectionValid = (adminUnitIndex) => !!activeCandidates[adminUnitIndex];
+
+  // Find first valid section on load/update
+  useEffect(() => {
+    if (!wardData) return;
+    // If currentUnitIndex is pointing to an empty section, move to next valid
+    if (!activeCandidates[currentUnitIndex]) {
+      // Find next valid
+      let nextValid = -1;
+      for (let i = currentUnitIndex; i < SECTIONS_CONFIG.length; i++) {
+        if (activeCandidates[i]) {
+          nextValid = i;
+          break;
+        }
+      }
+      // If valid found, jump there
+      if (nextValid !== -1 && nextValid !== currentUnitIndex) {
+        setCurrentUnitIndex(nextValid);
+        // Also ensure activeMachineId matches the new section
+        const targetMachine = SECTIONS_CONFIG[nextValid].machineId;
+        if (targetMachine !== activeMachineId) {
+          setActiveMachineId(targetMachine);
+        }
+      }
+    }
+  }, [wardData, currentUnitIndex, activeCandidates, activeMachineId]);
+
+  // Scroll to Top on Machine Change or Completion
+  useEffect(() => {
+    // Custom smooth scroll to top over 1500ms
+    smoothScrollTo(0, 1500);
+  }, [activeMachineId, isProcessComplete]);
+
   if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f3f4f6' }}>
@@ -97,7 +137,7 @@ const VotingApp = () => {
 
   if (!wardId) return <Navigate to="/admin" />;
 
-  const activeCandidates = wardData.candidates || {};
+
 
   // Custom Generator using Admin Data
   const generateCandidates = (startId, count, unitIndex) => {
@@ -111,6 +151,19 @@ const VotingApp = () => {
 
     return Array.from({ length: count }, (_, i) => {
       const isVisible = i === activeRowIndex;
+      const isNOTA = i === 6; // 7th slot (0-indexed)
+
+      if (isNOTA) {
+        return {
+          name: "None of the Above",
+          marathiName: "नोटा",
+          symbol: "",
+          photo: "",
+          hasPhoto: false,
+          isDisabled: true, // Disable NOTA as requested
+          isNOTA: true
+        };
+      }
 
       let symbolUrl = "";
       let photoUrl = "";
@@ -130,78 +183,123 @@ const VotingApp = () => {
     });
   };
 
-  const handleVote = (serialNo) => {
+
+
+  const handleVote = (serialNo, unitIdx) => {
     if (votedSerial !== null) return;
 
-    // SerialNo is now always 1-16 (relative to unit). 
-    // We don't need absolute serial for logic here, just for logging/tracking.
-    console.log(`Voted for Serial No: ${serialNo} in Unit ${currentUnitIndex + 1}`);
+    console.log(`Voted for Serial No: ${serialNo} in Section Index ${unitIdx}`);
     setVotedSerial(serialNo);
+    setCurrentUnitIndex(unitIdx);
 
-    // Track voted candidate details for summary
-    const assigned = activeCandidates[currentUnitIndex];
-    if (assigned && assigned.index === (serialNo)) { // SerialNo matches index directly (1-based)
+    const assigned = activeCandidates[unitIdx];
+    if (assigned && assigned.index === (serialNo)) {
       setVotedCandidate(assigned);
     }
 
-    // Beep timing adjustments
-    const totalUnits = parseInt(wardData.ballotCount);
-    const isLastUnit = currentUnitIndex >= totalUnits - 1;
+    // Determine Next Step
+    // Find next VALID section index
+    let nextValidIndex = -1;
+    for (let i = unitIdx + 1; i < SECTIONS_CONFIG.length; i++) {
+      if (activeCandidates[i]) {
+        nextValidIndex = i;
+        break;
+      }
+    }
+
+    const isLastValidSection = nextValidIndex === -1; // No more sections with candidates
 
     setTimeout(() => {
-      setVotedSerial(null);
-
-      if (isLastUnit) {
-        playSuccessBeep(); // Play Beep Sound
-
-        // Play Voice Message after a short delay (e.g. 1.5s after beep starts)
+      if (isLastValidSection) {
+        setVotedSerial(null);
+        playSuccessBeep();
         setTimeout(() => {
           playVoteSuccessAudio(language);
         }, 1500);
-
         setIsProcessComplete(true);
       } else {
-        setCurrentUnitIndex(prev => prev + 1);
+        // Move to next valid section
+        setVotedSerial(null);
+        setCurrentUnitIndex(nextValidIndex);
+
+        // Switch machine if needed
+        const nextMachineId = SECTIONS_CONFIG[nextValidIndex].machineId;
+        if (nextMachineId !== activeMachineId) {
+          // Delay slightly for effect or immediate?
+          // User said "Active blocked... automatically scrolled"
+          // Let's do it immediately after the vote delay
+          setActiveMachineId(nextMachineId);
+        }
       }
-    }, isLastUnit ? 800 : 2000); // Faster finish (800ms instead of 2000ms) for last unit to make beep 'early'
+    }, 1000);
   };
 
+  // --- SPLIT CANDIDATES INTO 4 SECTIONS (A, B, C, D) ---
+  const SLOTS_PER_SECTION = 7;
+
+  const SECTIONS_CONFIG = [
+    { id: 'A', labelEn: 'A', labelMr: 'अ', color: '#ffffff', machineId: 1 },
+    { id: 'B', labelEn: 'B', labelMr: 'ब', color: '#fca5a5', machineId: 1 },
+    { id: 'C', labelEn: 'C', labelMr: 'क', color: '#fef08a', machineId: 2 },
+    { id: 'D', labelEn: 'D', labelMr: 'ड', color: '#bae6fd', machineId: 2 }
+  ];
+
   const renderContent = () => {
+    console.log("Rendering Content. isProcessComplete:", isProcessComplete, "ActiveMachine:", activeMachineId);
     if (isProcessComplete) {
       return (
         <CompletionCard
           ward={wardData}
           language={language}
           votedCandidate={votedCandidate}
-          allCandidates={activeCandidates} // Pass all candidates
-          onShare={handleShare} // Pass rich share handler
+          allCandidates={activeCandidates}
+          onShare={handleShare}
         />
       );
     }
 
-    const candidatesPerUnit = 16;
-    // Always start serial from 1 for every unit
-    const startSerial = 1;
-    const candidates = generateCandidates(startSerial, candidatesPerUnit, currentUnitIndex);
+    // Generate Data Logic
+    console.log("Generating Sections Data...");
+    const sectionsData = SECTIONS_CONFIG.map((section, secIdx) => {
+      const adminUnitIndex = secIdx;
+      const startSerial = 1;
+      const candidates = generateCandidates(startSerial, SLOTS_PER_SECTION, adminUnitIndex);
+      // Check if this section has an assigned candidate
+      const isValid = !!activeCandidates[adminUnitIndex];
+      return { ...section, adminUnitIndex, candidates, isValid };
+    });
 
-    // Determine candidate name to show in Promo Card
-    const assigned = activeCandidates[currentUnitIndex];
-    const displayCandidateName = assigned ? (language === 'mr' || language === 'hi' ? (assigned.marathiName || assigned.name) : assigned.name) : null;
+    const machine1Sections = sectionsData.filter(s => s.machineId === 1);
+    const machine2Sections = sectionsData.filter(s => s.machineId === 2);
 
-    // Determine Unit Branding (Color & Label)
-    const getUnitBranding = (index) => {
-      const brands = [
-        { en: 'A', mr: 'अ', color: '#e5e7eb' }, // Default Grey/White
-        { en: 'B', mr: 'ब', color: '#fca5a5' }, // Pinkish (Red 300)
-        { en: 'C', mr: 'क', color: '#fef08a' }, // Yellowish (Yellow 200)
-        { en: 'D', mr: 'ड', color: '#bae6fd' }  // Blueish (Sky 200)
-      ];
-      const brand = brands[index] || brands[0];
-      const label = (language === 'mr' || language === 'hi') ? brand.mr : brand.en;
-      return { label, color: brand.color };
-    };
+    console.log("Machine 1 Sections:", machine1Sections.length, machine1Sections);
+    console.log("Machine 2 Sections:", machine2Sections.length);
 
-    const { label: unitLabel, color: headerColor } = getUnitBranding(currentUnitIndex);
+    let activeSectionForHeader = activeMachineId === 1 ? machine1Sections[0] : machine2Sections[0];
+    let displayCandidateName = null;
+
+    // Logic to determine name to show in Header
+    // 1. If voted, show voted candidate.
+    // 2. If not voted, show the assigned candidate for the active section (default A or C).
+
+    if (votedSerial !== null && votedCandidate) {
+      if (sectionsData[currentUnitIndex]) {
+        activeSectionForHeader = sectionsData[currentUnitIndex];
+      }
+      displayCandidateName = (language === 'mr' || language === 'hi') ? (votedCandidate.marathiName || votedCandidate.name) : votedCandidate.name;
+    } else {
+      // Fallback to assigned candidate for the currently visible section
+      if (sectionsData[visibleUnitIndex]) {
+        activeSectionForHeader = sectionsData[visibleUnitIndex];
+      }
+
+      const assignedForSection = activeCandidates[activeSectionForHeader.adminUnitIndex];
+      if (assignedForSection) {
+        displayCandidateName = (language === 'mr' || language === 'hi') ? (assignedForSection.marathiName || assignedForSection.name) : assignedForSection.name;
+      }
+    }
+
+    const activeLabel = (language === 'mr' || language === 'hi') ? activeSectionForHeader.labelMr : activeSectionForHeader.labelEn;
 
     return (
       <>
@@ -209,49 +307,64 @@ const VotingApp = () => {
           ward={wardData}
           candidateName={displayCandidateName}
           language={language}
-          unitLetter={unitLabel}
+          unitLetter={activeLabel}
         />
-        <BallotUnit
-          key={currentUnitIndex}
-          unitIndex={currentUnitIndex}
-          startSerialNo={startSerial}
-          language={language}
-          candidates={candidates}
-          onVote={handleVote}
-          votedSerialNo={votedSerial}
-          unitLabel={unitLabel}
-          headerColor={headerColor}
-        />
+
+        {activeMachineId === 1 && (
+          <div className="machine-container" id="machine-1">
+            <BallotUnit
+              key="machine-1"
+              machineId={1}
+              sections={machine1Sections}
+              language={language}
+              onVote={(serial, unitIdx) => {
+                handleVote(serial, unitIdx);
+                if (unitIdx === 1) {
+                  setTimeout(() => { setActiveMachineId(2); }, 1000);
+                }
+              }}
+              votedSerialNo={votedSerial}
+              currentUnitIndex={currentUnitIndex}
+              onSectionVisible={setVisibleUnitIndex}
+            />
+          </div>
+        )}
+
+        {activeMachineId === 2 && (
+          <div className="machine-container" id="machine-2">
+            <BallotUnit
+              key="machine-2"
+              machineId={2}
+              sections={machine2Sections}
+              language={language}
+              onVote={(serial, unitIdx) => {
+                handleVote(serial, unitIdx);
+              }}
+              votedSerialNo={votedSerial}
+              currentUnitIndex={currentUnitIndex}
+              onSectionVisible={setVisibleUnitIndex}
+            />
+          </div>
+        )}
       </>
     );
   };
 
   const handleShare = async () => {
     const t = translations[language] || translations['en'];
-    // Determine Name (English vs Marathi)
     const isLocalLang = language === 'mr' || language === 'hi';
     const wardName = (isLocalLang && wardData?.name_marathi) ? wardData.name_marathi : (wardData?.name || "N/A");
 
-    // Determine Ward/Prabhag Label and Format
-    // Format: "📍 Ward: Navi Mumbai – Prabhag No. 04" 
-    // We need to construct: [Label]: [WardName] – [UnitType] [Number]
-
-    // First, determine if we are showing Ward or Prabhag label
     const isPrabhag = wardData.prabhag_ward === 'Prabhag';
     const locationLabel = isPrabhag ? t.sharePrabhagLabel : t.shareWardLabel;
-
-    // Construct the second part "Prabhag No. 04"
     const unitTypeLabel = isPrabhag
       ? (isLocalLang ? 'प्रभाग क्र.' : 'Prabhag No.')
       : (isLocalLang ? 'वार्ड क्र.' : 'Ward No.');
 
-    // Pad number with 0 if single digit (e.g. 4 -> 04)
     const padNum = (num) => num.toString().padStart(2, '0');
     const unitNum = wardData.prabhag_number ? padNum(wardData.prabhag_number) : '';
-
     const locationLine = `${locationLabel}: ${wardName} – ${unitTypeLabel} ${unitNum}`;
 
-    // Candidate List with Emojis
     const numberEmojis = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
 
     let candidatesListText = "";
@@ -260,7 +373,7 @@ const VotingApp = () => {
         .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
         .map(([idx, candidate]) => {
           const serial = parseInt(idx) + 1;
-          const emoji = numberEmojis[serial] || `${serial}.`; // Fallback for > 10
+          const emoji = numberEmojis[serial] || `${serial}.`;
           const name = isLocalLang ? (candidate.marathiName || candidate.name) : candidate.name;
           return `${emoji} ${name}`;
         })
@@ -292,13 +405,12 @@ ${t.shareFooter}
         await navigator.share({
           title: `Election - ${wardName}`,
           text: shareText,
-          url: window.location.href, // Some apps use this, some use text
+          url: window.location.href,
         });
       } catch (err) {
         console.log('Error sharing:', err);
       }
     } else {
-      // Fallback
       navigator.clipboard.writeText(shareText);
       alert("Link copied to clipboard!");
     }

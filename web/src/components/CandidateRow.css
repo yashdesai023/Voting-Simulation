@@ -158,11 +158,15 @@
     box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-.vote-btn:disabled {
-    opacity: 0.7;
+.vote-btn:disabled,
+.vote-btn-disabled {
+    opacity: 0.6;
     cursor: not-allowed;
-    filter: grayscale(0.5);
-    /* Make disabled buttons look dull */
+    filter: grayscale(1);
+    background-color: #555 !important;
+    /* Make it distinctively grey */
+    pointer-events: none;
+    /* absolute disable */
 }
 
 .btn-inner {

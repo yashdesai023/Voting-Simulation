@@ -69,7 +69,7 @@ export const WardProvider = ({ children }) => {
                     id: c.id,
                     index: c.serialIndex, // Visual index
                     name: c.name,
-                    marathiName: c.marathi_name, // Map explicit field
+                    marathiName: c.name_marathi || c.marathi_name, // Map explicit field (handle both snake and camel case from DB)
                     symbol: c.symbol, // Filename
                     photo: c.photo, // Filename
                     hasPhoto: c.hasPhoto,
