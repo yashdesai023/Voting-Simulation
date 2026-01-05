@@ -10,16 +10,23 @@ const BallotUnit = ({ machineId, sections, language, onVote, votedSerialNo, curr
     // Intersection Observer for Header Update
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
+            // Find the entry with the highest intersection ratio
+            let maxRatio = 0;
+            let maxIndex = -1;
+
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const adminIndex = parseInt(entry.target.getAttribute('data-admin-index'));
-                    if (!isNaN(adminIndex) && onSectionVisible) {
-                        onSectionVisible(adminIndex);
-                    }
+                if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                    maxRatio = entry.intersectionRatio;
+                    maxIndex = parseInt(entry.target.getAttribute('data-admin-index'));
                 }
             });
+
+            if (maxIndex !== -1 && onSectionVisible) {
+                onSectionVisible(maxIndex);
+            }
         }, {
-            threshold: 0.6 // Trigger when 60% visible
+            threshold: [0.1, 0.3, 0.5, 0.7, 0.9], // Multiple thresholds for better granularity
+            rootMargin: "-10% 0px -50% 0px" // Focus on top half of viewport
         });
 
         sections.forEach((_, idx) => {
@@ -56,7 +63,14 @@ const BallotUnit = ({ machineId, sections, language, onVote, votedSerialNo, curr
             // On Load / Navigation (without vote): Ensure we scroll to the active section if valid
             // e.g. If A is blocked, App switches to B. We must scroll to B.
             const targetLocalIndex = sections.findIndex(s => s.adminUnitIndex === currentUnitIndex);
-            if (targetLocalIndex !== -1 && sections[targetLocalIndex].isValid) {
+
+            // If it's the very first section (local index 0), just scroll to top of PAGE to ensure clean start
+            if (targetLocalIndex === 0 && sections[targetLocalIndex].isValid) {
+                import('../utils/scroll').then(module => {
+                    module.smoothScrollTo(0, 1000);
+                });
+            }
+            else if (targetLocalIndex !== -1 && sections[targetLocalIndex].isValid) {
                 const elementId = `section-${machineId}-${targetLocalIndex}`;
                 // Short delay to ensure render
                 setTimeout(() => {
