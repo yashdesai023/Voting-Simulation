@@ -289,8 +289,12 @@ const VotingApp = () => {
       displayCandidateName = (language === 'mr' || language === 'hi') ? (votedCandidate.marathiName || votedCandidate.name) : votedCandidate.name;
     } else {
       // Fallback to assigned candidate for the currently visible section
-      if (sectionsData[visibleUnitIndex]) {
+      // Fallback to assigned candidate for the currently visible section
+      if (sectionsData[visibleUnitIndex] && sectionsData[visibleUnitIndex].isValid) {
         activeSectionForHeader = sectionsData[visibleUnitIndex];
+      } else if (sectionsData[currentUnitIndex] && sectionsData[currentUnitIndex].isValid) {
+        // Fallback to the active voting section if the visible one is blocked/invalid
+        activeSectionForHeader = sectionsData[currentUnitIndex];
       }
 
       const assignedForSection = activeCandidates[activeSectionForHeader.adminUnitIndex];

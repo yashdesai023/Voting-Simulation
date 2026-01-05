@@ -6,18 +6,27 @@ import { translations } from '../utils/translations';
 const BallotUnit = ({ machineId, sections, language, onVote, votedSerialNo, currentUnitIndex, onSectionVisible }) => {
     const t = translations[language];
     const scrollContainerRef = useRef(null);
+    const intersectionRatios = useRef({});
 
     // Intersection Observer for Header Update
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
-            // Find the entry with the highest intersection ratio
+            // Update the map with latest ratios
+            entries.forEach(entry => {
+                const adminIndex = parseInt(entry.target.getAttribute('data-admin-index'));
+                if (!isNaN(adminIndex)) {
+                    intersectionRatios.current[adminIndex] = entry.intersectionRatio;
+                }
+            });
+
+            // Find the section with the highest intersection ratio
             let maxRatio = 0;
             let maxIndex = -1;
 
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-                    maxRatio = entry.intersectionRatio;
-                    maxIndex = parseInt(entry.target.getAttribute('data-admin-index'));
+            Object.entries(intersectionRatios.current).forEach(([idx, ratio]) => {
+                if (ratio > maxRatio) {
+                    maxRatio = ratio;
+                    maxIndex = parseInt(idx);
                 }
             });
 
@@ -25,8 +34,8 @@ const BallotUnit = ({ machineId, sections, language, onVote, votedSerialNo, curr
                 onSectionVisible(maxIndex);
             }
         }, {
-            threshold: [0.1, 0.3, 0.5, 0.7, 0.9], // Multiple thresholds for better granularity
-            rootMargin: "-10% 0px -50% 0px" // Focus on top half of viewport
+            threshold: [0], // Trigger as soon as it hits the center strip
+            rootMargin: "-45% 0px -45% 0px" // Focus strictly on the vertical center
         });
 
         sections.forEach((_, idx) => {
