@@ -6,7 +6,7 @@
     max-width: 600px;
     overflow: hidden;
     margin: 20px auto;
-    font-family: 'Poppins', 'Eczar', sans-serif;
+    font-family: 'Anek Devanagari', 'Poppins', sans-serif;
     text-align: center;
     border: 1px solid #e5e7eb;
 }
@@ -263,6 +263,7 @@
     text-align: left !important;
     /* Forced */
     width: 100%;
+    line-height: 1.2;
 }
 
 .voted-position {
@@ -271,6 +272,7 @@
     text-align: left !important;
     /* Forced */
     width: 100%;
+    font-weight: 700;
 }
 
 .voted-symbol-area {
@@ -307,7 +309,7 @@
     }
 
     .voted-name {
-        font-size: 1rem;
+        font-size: 1.4rem;
     }
 
     .voted-symbol {

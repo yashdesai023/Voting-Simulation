@@ -12,9 +12,7 @@
     /* Add shadow for separation */
     margin: 0 auto;
     /* Remove top margin */
-    font-family: 'Poppins',
-        'Eczar',
-        sans-serif;
+    font-family: 'Anek Devanagari', 'Poppins', sans-serif;
 
     /* Sticky Positioning */
     position: sticky;

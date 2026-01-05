@@ -39,20 +39,26 @@
 }
 
 .serial-no {
-    width: 30px;
-    font-weight: bold;
+    width: 40px;
+    /* Increased width to accommodate larger text */
+    font-weight: 800;
+    font-size: 1.3rem;
+    /* Added size */
+    text-align: center;
 }
 
 .candidate-name {
     flex: 1;
-    font-weight: 700;
+    font-weight: 800;
     padding-left: 15px;
     border-right: 1px solid #bbb;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    /* Adjusted to user request */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    line-height: 1.2;
+    line-height: 1.1;
+    /* Tighter line height for two lines of large text */
 }
 
 .name-en {
@@ -60,11 +66,12 @@
 }
 
 .name-regional {
-    font-size: 0.95rem;
-    /* Slightly smaller than English name */
+    font-size: 1.15rem;
+    /* Matched to English */
     color: #000;
-    font-weight: 500;
-    margin-top: 2px;
+    font-weight: 700;
+    /* Slightly lighter than En 800 if needed, or keeping high visibility */
+    margin-top: 0px;
 }
 
 .candidate-photo {
@@ -208,7 +215,8 @@
 
     .serial-no {
         width: 25px;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
+        /* Increased from 0.9rem */
     }
 
     .candidate-photo {
@@ -220,8 +228,10 @@
     }
 
     .candidate-name {
-        font-size: 0.9rem;
+        font-size: 1.3rem !important;
+        /* Increased from 0.9rem, force override */
         padding-left: 5px;
+        line-height: 1.2;
     }
 
     .machine-section {

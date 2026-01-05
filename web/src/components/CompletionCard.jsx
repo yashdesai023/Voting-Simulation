@@ -67,7 +67,7 @@ const CompletionCard = ({ ward, language, votedCandidate, allCandidates, onShare
 
                                         {/* Middle: Info */}
                                         <div className="voted-info">
-                                            <h3 className="voted-name" style={{ fontSize: '1rem' }}>
+                                            <h3 className="voted-name">
                                                 {language === 'mr' || language === 'hi' ? (candidate.marathiName || candidate.name) : candidate.name}
                                             </h3>
                                             <div className="voted-position">
