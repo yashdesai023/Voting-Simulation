@@ -1,5 +1,5 @@
 config:
-  target: "http://3.145.11.27" # New AWS EC2 IP (t3.large)
+  target: "http://18.218.50.201" # New AWS EC2 IP (t3.large)
   phases:
     - duration: 60
       arrivalRate: 5
