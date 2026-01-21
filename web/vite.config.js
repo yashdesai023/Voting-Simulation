@@ -7,11 +7,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://3.145.11.27',
+        target: 'http://18.218.50.201',
         changeOrigin: true,
       },
       '/_': {
-        target: 'http://3.145.11.27',
+        target: 'http://18.218.50.201',
         changeOrigin: true,
       }
     }
